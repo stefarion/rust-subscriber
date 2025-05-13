@@ -11,4 +11,15 @@
 
 ![Slow Subscriber](SlowSub.png)
 <br><br>
-Bisa dilihat pada grafik Queued Messages terjadi peningkatan karena banyak pesan yang dikirim ke _broker_ oleh Publisher, namun belum semuanya diproses oleh Subscriber yang lebih lambat. Dari gambar di atas, mesin saya memiliki 35 _queue_. Hal ini terjadi akibat Subscriber perlu waktu lebih lama untuk memproses tiap event/pesan yang berada di _message queue_, sehingga terjadi penumpukkan pada _queue_ karena Publisher lebih cepat mem-_publish_ pesan daripada Subscriber memprosesnya.
+Bisa dilihat pada grafik Queued Messages terjadi peningkatan karena banyak pesan yang dikirim ke _broker_ oleh Publisher, namun belum semuanya diproses oleh Subscriber yang lebih lambat. Dari gambar di atas, mesin saya memiliki 35 _queue_. Hal ini terjadi akibat Subscriber perlu waktu lebih lama untuk memproses tiap event/pesan yang berada di _message queue_, sehingga terjadi penumpukkan pada _queue_ karena Publisher lebih cepat mem-_publish_ pesan daripada Subscriber menerimanya.<br><br>
+
+#### After three subscribers,
+![Effective](EffectiveGraph.png)
+#### Subscriber 1
+![Sub1](Sub1.png)
+#### Subscriber 2
+![Sub2](Sub2.png)
+#### Subscriber 3
+![Sub3](Sub3.png)
+<br><br>
+Bisa dilihat bahwa total _queue_ yang dihasilkan pada grafik telah berkurang dari sebelumnya 35 _queue_ menjadi sekitar 17 _queue_. Alasannya karena tiap Subscriber menerima pesan yang unik ketika Publisher telah mengirimkan sejumlah besar data ke _queue_. Setiap Subscriber mengambil pesan-pesan secara terpisah dari _queue_ dan setelah diambil, pesan akan dihapus dari _queue_ dan tidak dapat digunakan oleh Subscriber lain.
